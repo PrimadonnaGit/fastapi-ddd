@@ -159,7 +159,7 @@ from pydantic import BaseModel
 
 
 class Product(BaseModel):
-    id: Optional[int]
+    id: int | None
     name: str
     price: float
 

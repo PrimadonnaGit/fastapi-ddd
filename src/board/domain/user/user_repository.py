@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from .user import User
 
@@ -10,15 +9,15 @@ class UserRepository(ABC):
         pass
 
     @abstractmethod
-    def find_by_id(self, id: int) -> Optional[User]:
+    def find_by_id(self, id: int) -> User | None:
         pass
 
     @abstractmethod
-    def find_by_user_id(self, user_id: str) -> Optional[User]:
+    def find_by_user_id(self, user_id: str) -> User | None:
         pass
 
     @abstractmethod
-    def find_by_nickname(self, nickname: str) -> Optional[User]:
+    def find_by_nickname(self, nickname: str) -> User | None:
         pass
 
     @abstractmethod

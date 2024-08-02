@@ -1,5 +1,3 @@
-from typing import Optional
-
 from sqlmodel import Session, select
 
 from board.domain.file.file import File
@@ -22,7 +20,7 @@ class SQLModelFileRepository(FileRepository):
         self.session.refresh(db_file)
         return self.mapper.to_domain(db_file)
 
-    def find_by_id(self, id: int) -> Optional[File]:
+    def find_by_id(self, id: int) -> File | None:
         statement = select(FileModel).where(FileModel.id == id)
         db_file = self.session.exec(statement).first()
         return self.mapper.to_domain(db_file) if db_file else None

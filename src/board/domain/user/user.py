@@ -1,11 +1,10 @@
 from datetime import datetime
-from typing import Optional
 
 from pydantic import BaseModel
 
 
 class User(BaseModel):
-    id: Optional[int] = None
+    id: int | None = None
     user_id: str
     nickname: str
     password: str

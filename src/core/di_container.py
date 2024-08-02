@@ -1,6 +1,7 @@
 from dependency_injector import containers, providers
 from sqlmodel import create_engine, Session
 
+from board.application.auth.auth_service import AuthApplicationService
 from board.application.category.category_service import CategoryApplicationService
 from board.application.comment.comment_service import CommentApplicationService
 from board.application.file.file_service import FileApplicationService
@@ -59,4 +60,7 @@ class Container(containers.DeclarativeContainer):
     )
     file_application_service = providers.Factory(
         FileApplicationService, file_repository=file_repository
+    )
+    auth_application_service = providers.Factory(
+        AuthApplicationService, user_repository=user_repository
     )

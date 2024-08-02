@@ -1,5 +1,3 @@
-from typing import Optional
-
 from sqlmodel import Session, select
 
 from board.domain.category.category import Category
@@ -22,7 +20,7 @@ class SQLModelCategoryRepository(CategoryRepository):
         self.session.refresh(db_category)
         return self.mapper.to_domain(db_category)
 
-    def find_by_id(self, id: int) -> Optional[Category]:
+    def find_by_id(self, id: int) -> Category | None:
         statement = select(CategoryModel).where(CategoryModel.id == id)
         db_category = self.session.exec(statement).first()
         return self.mapper.to_domain(db_category) if db_category else None

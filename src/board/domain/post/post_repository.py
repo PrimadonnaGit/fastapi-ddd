@@ -1,24 +1,19 @@
 from abc import ABC, abstractmethod
-from typing import Optional
 
-from .post import Post
+from .post_aggregate import PostAggregate
 
 
 class PostRepository(ABC):
     @abstractmethod
-    def save(self, post: Post) -> Post:
+    def save(self, post_aggregate: PostAggregate) -> PostAggregate:
         pass
 
     @abstractmethod
-    def find_by_id(self, id: int) -> Optional[Post]:
+    def find_by_id(self, id: int) -> PostAggregate | None:
         pass
 
     @abstractmethod
-    def find_all(self, skip: int = 0, limit: int = 100) -> list[Post]:
-        pass
-
-    @abstractmethod
-    def update(self, post: Post) -> Post:
+    def find_all(self, skip: int = 0, limit: int = 100) -> list[PostAggregate]:
         pass
 
     @abstractmethod
@@ -26,5 +21,5 @@ class PostRepository(ABC):
         pass
 
     @abstractmethod
-    def search(self, query: str) -> list[Post]:
+    def search(self, query: str) -> list[PostAggregate]:
         pass

@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from .file import File
 
@@ -10,7 +9,7 @@ class FileRepository(ABC):
         pass
 
     @abstractmethod
-    def find_by_id(self, id: int) -> Optional[File]:
+    def find_by_id(self, id: int) -> File | None:
         pass
 
     @abstractmethod

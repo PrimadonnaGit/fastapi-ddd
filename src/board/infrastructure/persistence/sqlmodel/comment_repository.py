@@ -1,5 +1,3 @@
-from typing import Optional
-
 from sqlmodel import Session, select
 
 from board.domain.comment.comment import Comment
@@ -22,7 +20,7 @@ class SQLModelCommentRepository(CommentRepository):
         self.session.refresh(db_comment)
         return self.mapper.to_domain(db_comment)
 
-    def find_by_id(self, id: int) -> Optional[Comment]:
+    def find_by_id(self, id: int) -> Comment | None:
         statement = select(CommentModel).where(CommentModel.id == id)
         db_comment = self.session.exec(statement).first()
         return self.mapper.to_domain(db_comment) if db_comment else None

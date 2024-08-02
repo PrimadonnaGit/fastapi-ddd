@@ -15,7 +15,14 @@ class UserService:
         if self.user_repository.find_by_nickname(nickname):
             raise ValueError("Nickname already exists")
 
-        hashed_password = Password(password).hashed_value
-        user = User(id=None, user_id=user_id, nickname=nickname, password=hashed_password,
-                    is_admin=False, create_time=datetime.utcnow(), is_withdraw=False)
+        hashed_password = Password(value=password).hashed_value
+        user = User(
+            id=None,
+            user_id=user_id,
+            nickname=nickname,
+            password=hashed_password,
+            is_admin=False,
+            create_time=datetime.utcnow(),
+            is_withdraw=False,
+        )
         return self.user_repository.save(user)

@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from .category import Category
 
@@ -10,7 +9,7 @@ class CategoryRepository(ABC):
         pass
 
     @abstractmethod
-    def find_by_id(self, id: int) -> Optional[Category]:
+    def find_by_id(self, id: int) -> Category | None:
         pass
 
     @abstractmethod

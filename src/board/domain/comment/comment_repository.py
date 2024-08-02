@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from .comment import Comment
 
@@ -10,7 +9,7 @@ class CommentRepository(ABC):
         pass
 
     @abstractmethod
-    def find_by_id(self, id: int) -> Optional[Comment]:
+    def find_by_id(self, id: int) -> Comment | None:
         pass
 
     @abstractmethod

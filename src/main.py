@@ -7,6 +7,7 @@ from board.interfaces.api.v1 import (
     post_routes,
     comment_routes,
     file_routes,
+    auth_routes,
 )
 from core.config import settings
 from core.di_container import Container
@@ -16,6 +17,7 @@ container = Container()
 
 app.container = container
 
+app.include_router(auth_routes.router, tags=["auth"])
 app.include_router(user_routes.router, prefix="/api/v1/users", tags=["users"])
 app.include_router(
     category_routes.router, prefix="/api/v1/categories", tags=["categories"]
@@ -42,16 +44,6 @@ def on_startup():
 @app.on_event("shutdown")
 async def on_shutdown():
     container.db_engine().dispose()
-
-
-# @app.middleware("http")
-# async def db_session_middleware(request, call_next):
-#     session = next(get_db_session())
-#     try:
-#         response = await call_next(request)
-#     finally:
-#         session.close()
-#     return response
 
 
 if __name__ == "__main__":

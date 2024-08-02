@@ -2,7 +2,7 @@ from typing import Annotated
 
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
-from jose import JWTError, jwt
+from jose import jwt, JWTError
 from sqlmodel import Session
 from starlette import status
 from starlette.exceptions import HTTPException
@@ -42,9 +42,15 @@ def get_user_service(
     return container.user_application_service(user_repository=user_repository)
 
 
+def get_auth_service(
+    user_repository: Annotated[UserRepository, Depends(get_user_repository)]
+):
+    return container.auth_application_service(user_repository=user_repository)
+
+
 async def get_current_user(
-    token: Annotated[str, Depends(oauth2_scheme)],
-    user_service: Annotated[UserApplicationService, Depends(get_user_service)],
+    token: str = Depends(oauth2_scheme),
+    user_repository: UserRepository = Depends(get_user_repository),
 ):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -55,12 +61,12 @@ async def get_current_user(
         payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
-        username: str = payload.get("sub")
-        if username is None:
+        user_id: str = payload.get("sub")
+        if user_id is None:
             raise credentials_exception
     except JWTError:
         raise credentials_exception
-    user = user_service.get_user_by_username(username)
+    user = user_repository.find_by_user_id(user_id)
     if user is None:
         raise credentials_exception
     return user

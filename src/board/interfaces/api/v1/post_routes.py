@@ -4,6 +4,7 @@ from board.application.post.post_dto import (
     PostCreateDTO,
     PostResponseDTO,
     PostUpdateDTO,
+    PostSearchDTO,
 )
 from board.application.post.post_service import PostApplicationService
 from board.domain.user.user import User
@@ -57,8 +58,11 @@ def delete_post(
         raise HTTPException(status_code=403, detail=str(e))
 
 
-@router.get("/search", response_model=list[PostResponseDTO])
+@router.get("/search", response_model=list[PostSearchDTO])
 def search_posts(
-    query: str, post_service: PostApplicationService = Depends(get_post_service)
+    query: str,
+    skip: int = 0,
+    limit: int = 20,
+    post_service: PostApplicationService = Depends(get_post_service),
 ):
-    return post_service.search_posts(query)
+    return post_service.search_posts(query, skip, limit)
