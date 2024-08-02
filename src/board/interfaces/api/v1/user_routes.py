@@ -9,8 +9,8 @@ router = APIRouter()
 
 @router.post("/register", response_model=UserResponseDTO)
 def register_user(
-        user: UserRegisterDTO,
-        user_service: UserApplicationService = Depends(get_user_service),
+    user: UserRegisterDTO,
+    user_service: UserApplicationService = Depends(get_user_service),
 ):
     try:
         return user_service.register_user(user)
@@ -20,7 +20,7 @@ def register_user(
 
 @router.get("/{user_id}", response_model=UserResponseDTO)
 def get_user(
-        user_id: int, user_service: UserApplicationService = Depends(get_user_service)
+    user_id: int, user_service: UserApplicationService = Depends(get_user_service)
 ):
     user = user_service.get_user_by_id(user_id)
     if not user:
@@ -30,9 +30,9 @@ def get_user(
 
 @router.put("/{user_id}", response_model=UserResponseDTO)
 def update_user(
-        user_id: int,
-        user: UserRegisterDTO,
-        user_service: UserApplicationService = Depends(get_user_service),
+    user_id: int,
+    user: UserRegisterDTO,
+    user_service: UserApplicationService = Depends(get_user_service),
 ):
     try:
         return user_service.update_user(user_id, user)
@@ -42,7 +42,7 @@ def update_user(
 
 @router.delete("/{user_id}")
 def delete_user(
-        user_id: int, user_service: UserApplicationService = Depends(get_user_service)
+    user_id: int, user_service: UserApplicationService = Depends(get_user_service)
 ):
     user_service.delete_user(user_id)
     return {"message": "User deleted successfully"}

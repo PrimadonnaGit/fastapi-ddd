@@ -14,16 +14,16 @@ router = APIRouter()
 
 @router.post("/", response_model=PostResponseDTO)
 def create_post(
-        post: PostCreateDTO,
-        post_service: PostApplicationService = Depends(get_post_service),
-        current_user: User = Depends(get_current_user),
+    post: PostCreateDTO,
+    post_service: PostApplicationService = Depends(get_post_service),
+    current_user: User = Depends(get_current_user),
 ):
     return post_service.create_post(post, current_user.id)
 
 
 @router.get("/{post_id}", response_model=PostResponseDTO)
 def get_post(
-        post_id: int, post_service: PostApplicationService = Depends(get_post_service)
+    post_id: int, post_service: PostApplicationService = Depends(get_post_service)
 ):
     try:
         return post_service.get_post(post_id)
@@ -33,10 +33,10 @@ def get_post(
 
 @router.put("/{post_id}", response_model=PostResponseDTO)
 def update_post(
-        post_id: int,
-        post: PostUpdateDTO,
-        post_service: PostApplicationService = Depends(get_post_service),
-        current_user: User = Depends(get_current_user),
+    post_id: int,
+    post: PostUpdateDTO,
+    post_service: PostApplicationService = Depends(get_post_service),
+    current_user: User = Depends(get_current_user),
 ):
     try:
         return post_service.update_post(post_id, post, current_user.id)
@@ -46,9 +46,9 @@ def update_post(
 
 @router.delete("/{post_id}")
 def delete_post(
-        post_id: int,
-        post_service: PostApplicationService = Depends(get_post_service),
-        current_user: User = Depends(get_current_user),
+    post_id: int,
+    post_service: PostApplicationService = Depends(get_post_service),
+    current_user: User = Depends(get_current_user),
 ):
     try:
         post_service.delete_post(post_id, current_user.id)
@@ -59,6 +59,6 @@ def delete_post(
 
 @router.get("/search", response_model=list[PostResponseDTO])
 def search_posts(
-        query: str, post_service: PostApplicationService = Depends(get_post_service)
+    query: str, post_service: PostApplicationService = Depends(get_post_service)
 ):
     return post_service.search_posts(query)

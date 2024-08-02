@@ -10,26 +10,26 @@ router = APIRouter()
 
 @router.post("/upload/{post_id}", response_model=FileResponseDTO)
 async def upload_file(
-        post_id: int,
-        file: UploadFile = File(...),
-        file_service: FileApplicationService = Depends(get_file_service),
-        current_user: User = Depends(get_current_user),
+    post_id: int,
+    file: UploadFile = File(...),
+    file_service: FileApplicationService = Depends(get_file_service),
+    current_user: User = Depends(get_current_user),
 ):
     return await file_service.save_file(file, post_id)
 
 
 @router.get("/post/{post_id}", response_model=list[FileResponseDTO])
 def get_files_by_post(
-        post_id: int, file_service: FileApplicationService = Depends(get_file_service)
+    post_id: int, file_service: FileApplicationService = Depends(get_file_service)
 ):
     return file_service.get_files_by_post(post_id)
 
 
 @router.delete("/{file_id}")
 def delete_file(
-        file_id: int,
-        file_service: FileApplicationService = Depends(get_file_service),
-        current_user: User = Depends(get_current_user),
+    file_id: int,
+    file_service: FileApplicationService = Depends(get_file_service),
+    current_user: User = Depends(get_current_user),
 ):
     try:
         file_service.delete_file(file_id)

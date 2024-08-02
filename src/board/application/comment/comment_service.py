@@ -8,7 +8,7 @@ class CommentApplicationService:
         self.comment_repository = comment_repository
 
     def create_comment(
-            self, comment_dto: CommentCreateDTO, user_id: int
+        self, comment_dto: CommentCreateDTO, user_id: int
     ) -> CommentResponseDTO:
         comment = Comment(
             content=comment_dto.content,
@@ -24,7 +24,7 @@ class CommentApplicationService:
         return [CommentResponseDTO.model_validate(comment) for comment in comments]
 
     def update_comment(
-            self, id: int, comment_dto: CommentUpdateDTO, user_id: int
+        self, id: int, comment_dto: CommentUpdateDTO, user_id: int
     ) -> CommentResponseDTO:
         comment = self.comment_repository.find_by_id(id)
         if not comment:

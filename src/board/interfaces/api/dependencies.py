@@ -31,20 +31,20 @@ def get_db_session() -> Session:
 
 
 def get_user_repository(
-        session: Annotated[Session, Depends(get_db_session)]
+    session: Annotated[Session, Depends(get_db_session)]
 ) -> UserRepository:
     return container.user_repository(session=session)
 
 
 def get_user_service(
-        user_repository: Annotated[UserRepository, Depends(get_user_repository)]
+    user_repository: Annotated[UserRepository, Depends(get_user_repository)]
 ) -> UserApplicationService:
     return container.user_application_service(user_repository=user_repository)
 
 
 async def get_current_user(
-        token: Annotated[str, Depends(oauth2_scheme)],
-        user_service: Annotated[UserApplicationService, Depends(get_user_service)],
+    token: Annotated[str, Depends(oauth2_scheme)],
+    user_service: Annotated[UserApplicationService, Depends(get_user_service)],
 ):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -67,15 +67,15 @@ async def get_current_user(
 
 
 def get_category_repository(
-        session: Annotated[Session, Depends(get_db_session)]
+    session: Annotated[Session, Depends(get_db_session)]
 ) -> CategoryRepository:
     return container.category_repository(session=session)
 
 
 def get_category_service(
-        category_repository: Annotated[
-            CategoryApplicationService, Depends(get_category_repository)
-        ]
+    category_repository: Annotated[
+        CategoryApplicationService, Depends(get_category_repository)
+    ]
 ) -> CategoryApplicationService:
     return container.category_application_service(
         category_repository=category_repository
@@ -87,7 +87,7 @@ def get_post_repository(db: Session = Depends(get_db_session)) -> PostRepository
 
 
 def get_post_service(
-        post_repository: Annotated[PostRepository, Depends(get_post_repository)]
+    post_repository: Annotated[PostRepository, Depends(get_post_repository)]
 ) -> PostApplicationService:
     return Container().post_application_service(post_repository=post_repository)
 
@@ -97,7 +97,7 @@ def get_comment_repository(db: Session = Depends(get_db_session)) -> CommentRepo
 
 
 def get_comment_service(
-        comment_repository: Annotated[CommentRepository, Depends(get_comment_repository)]
+    comment_repository: Annotated[CommentRepository, Depends(get_comment_repository)]
 ) -> CommentApplicationService:
     return Container().comment_application_service(
         comment_repository=comment_repository
@@ -109,6 +109,6 @@ def get_file_repository(db: Session = Depends(get_db_session)) -> FileRepository
 
 
 def get_file_service(
-        file_repository: Annotated[FileRepository, Depends(get_file_repository)]
+    file_repository: Annotated[FileRepository, Depends(get_file_repository)]
 ) -> FileApplicationService:
     return Container().file_application_service(file_repository=file_repository)
