@@ -18,7 +18,6 @@ async def login_for_access_token(
     auth_service: AuthApplicationService = Depends(get_auth_service),
 ):
     user = auth_service.authenticate_user(form_data.username, form_data.password)
-    print("user", user)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

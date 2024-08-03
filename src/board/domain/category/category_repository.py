@@ -13,6 +13,10 @@ class CategoryRepository(ABC):
         pass
 
     @abstractmethod
+    def find_by_name(self, name: str) -> Category | None:
+        pass
+
+    @abstractmethod
     def find_all(self) -> list[Category]:
         pass
 

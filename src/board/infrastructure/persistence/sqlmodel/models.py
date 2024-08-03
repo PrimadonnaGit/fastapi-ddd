@@ -15,7 +15,7 @@ class UserModel(SQLModel, table=True):
 
 class CategoryModel(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    name: str = Field(index=True)
+    name: str = Field(unique=True, index=True)
 
     posts: list["PostModel"] = Relationship(back_populates="category")
 

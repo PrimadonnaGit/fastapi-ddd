@@ -28,3 +28,6 @@ class CommentResponseDTO(BaseModel):
     post_id: int
     user_id: int
     parent_comment_id: int | None
+
+    class Config:
+        from_attributes = True

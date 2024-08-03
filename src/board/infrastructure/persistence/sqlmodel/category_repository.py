@@ -25,18 +25,22 @@ class SQLModelCategoryRepository(CategoryRepository):
         db_category = self.session.exec(statement).first()
         return self.mapper.to_domain(db_category) if db_category else None
 
+    def find_by_name(self, name: str) -> Category | None:
+        statement = select(CategoryModel).where(CategoryModel.name == name)
+        db_category = self.session.exec(statement).first()
+        return self.mapper.to_domain(db_category) if db_category else None
+
     def find_all(self) -> list[Category]:
         statement = select(CategoryModel)
         db_categories = self.session.exec(statement).all()
         return [self.mapper.to_domain(db_category) for db_category in db_categories]
 
     def update(self, category: Category) -> Category:
-        db_category = self.session.get(CategoryModel, category.id)
-        if db_category:
-            db_category.name = category.name
-            self.session.add(db_category)
-            self.session.commit()
-            self.session.refresh(db_category)
+        db_category = self.mapper.to_orm(category)
+        db_category = self.session.merge(db_category)
+
+        self.session.commit()
+        self.session.refresh(db_category)
         return self.mapper.to_domain(db_category)
 
     def delete(self, id: int) -> None:
