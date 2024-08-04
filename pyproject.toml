@@ -18,7 +18,15 @@ bcrypt = "^4.2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
+pytest = "^8.3.2"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
+
+

@@ -14,7 +14,7 @@ router = APIRouter()
 
 @router.post("/register", response_model=UserResponseDTO)
 def register_user(
-    user_register_dto: UserRegisterDTO,
+    user_register_dto: UserRegisterDTO = Body(...),
     user_service: UserApplicationService = Depends(get_user_service),
 ):
     try:

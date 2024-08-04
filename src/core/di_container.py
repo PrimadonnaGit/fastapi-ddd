@@ -22,7 +22,7 @@ from board.infrastructure.persistence.sqlmodel.post_repository import (
 from board.infrastructure.persistence.sqlmodel.user_repository import (
     SQLModelUserRepository,
 )
-from .config import settings
+from core.config import settings
 
 
 class Container(containers.DeclarativeContainer):
