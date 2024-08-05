@@ -9,7 +9,7 @@ class UserRepository(ABC):
         pass
 
     @abstractmethod
-    def find_by_id(self, id: int) -> User | None:
+    def find_by_id(self, user_id: int) -> User | None:
         pass
 
     @abstractmethod
@@ -25,5 +25,5 @@ class UserRepository(ABC):
         pass
 
     @abstractmethod
-    def delete(self, id: int) -> None:
+    def delete(self, user_id: int) -> None:
         pass

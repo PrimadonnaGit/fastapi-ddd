@@ -9,7 +9,7 @@ class CommentRepository(ABC):
         pass
 
     @abstractmethod
-    def find_by_id(self, id: int) -> Comment | None:
+    def find_by_id(self, comment_id: int) -> Comment | None:
         pass
 
     @abstractmethod
@@ -21,5 +21,5 @@ class CommentRepository(ABC):
         pass
 
     @abstractmethod
-    def delete(self, id: int) -> None:
+    def delete(self, comment_id: int) -> None:
         pass

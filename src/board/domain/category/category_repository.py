@@ -9,7 +9,7 @@ class CategoryRepository(ABC):
         pass
 
     @abstractmethod
-    def find_by_id(self, id: int) -> Category | None:
+    def find_by_id(self, category_id: int) -> Category | None:
         pass
 
     @abstractmethod
@@ -25,5 +25,5 @@ class CategoryRepository(ABC):
         pass
 
     @abstractmethod
-    def delete(self, id: int) -> None:
+    def delete(self, category_id: int) -> None:
         pass

@@ -9,17 +9,17 @@ class PostRepository(ABC):
         pass
 
     @abstractmethod
-    def find_by_id(self, id: int) -> PostAggregate | None:
+    def find_by_id(self, post_id: int) -> PostAggregate | None:
         pass
 
     @abstractmethod
-    def find_all(self, skip: int = 0, limit: int = 100) -> list[PostAggregate]:
+    def delete(self, post_id: int) -> None:
         pass
 
     @abstractmethod
-    def delete(self, id: int) -> None:
+    def update(self, post_aggregate: PostAggregate) -> PostAggregate:
         pass
 
     @abstractmethod
-    def search(self, query: str) -> list[PostAggregate]:
+    def search(self, query: str, limit: int, offset: int) -> list[PostAggregate]:
         pass

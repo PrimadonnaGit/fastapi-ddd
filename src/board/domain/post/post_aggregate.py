@@ -27,8 +27,16 @@ class PostAggregate:
     def remove_file(self, file_id: int) -> None:
         self.files = [f for f in self.files if f.id != file_id]
 
-    def update_post(self, title: str, content: str, category_id: int) -> None:
-        self.post.title = title
-        self.post.content = content
-        self.post.category_id = category_id
+    def update_post(
+        self, title: str | None, content: str | None, category_id: int | None
+    ) -> None:
+        if title:
+            self.post.title = title
+
+        if content:
+            self.post.content = content
+
+        if category_id:
+            self.post.category_id = category_id
+
         self.post.updated_at = datetime.utcnow()

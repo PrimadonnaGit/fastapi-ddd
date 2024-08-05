@@ -9,7 +9,7 @@ class FileRepository(ABC):
         pass
 
     @abstractmethod
-    def find_by_id(self, id: int) -> File | None:
+    def find_by_id(self, file_id: int) -> File | None:
         pass
 
     @abstractmethod
@@ -17,5 +17,5 @@ class FileRepository(ABC):
         pass
 
     @abstractmethod
-    def delete(self, id: int) -> None:
+    def delete(self, file_id: int) -> None:
         pass
